@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string></string>
+	<string>com.pawelgrzybek.alfred-coinmarketcap</string>
 	<key>category</key>
-	<string>Tools</string>
+	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
 		<key>CD8B0843-794E-46D1-8D03-A8012CC67657</key>
@@ -20,10 +20,20 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>732B04CC-66FF-4299-B255-2284AA549A97</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
-	<string>Paweł Grzybek</string>
+	<string>Pawel Grzybek</string>
 	<key>description</key>
 	<string>Convert price using CointMarketCap API</string>
 	<key>disabled</key>
@@ -75,7 +85,7 @@
 				<key>queuedelaymode</key>
 				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>runningsubtext</key>
 				<string>Searching...</string>
 				<key>script</key>
@@ -84,7 +94,7 @@ eval "$($SHELL -i -l -c 'echo -e "\n"PATH=\"$PATH:\$PATH\""\n"' 2&gt;/dev/null |
 export PATH
 
 if command -v node &gt;/dev/null 2&gt;&amp;1; then
-	node index.js "$1"
+	node index.js "$API_KEY $DEFAULT_CURRENCY $1"
 else
 	echo $'{
     "items":[
@@ -100,7 +110,7 @@ fi</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>ex. cmc 0.01 BTC GBP</string>
+				<string>Example: cpc 0.02 BTC GBP</string>
 				<key>title</key>
 				<string>Convert coin price using CoinMarketCap</string>
 				<key>type</key>
@@ -115,6 +125,25 @@ fi</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>732B04CC-66FF-4299-B255-2284AA549A97</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -127,14 +156,35 @@ fi</string>
 			<key>ypos</key>
 			<integer>60</integer>
 		</dict>
+		<key>732B04CC-66FF-4299-B255-2284AA549A97</key>
+		<dict>
+			<key>xpos</key>
+			<integer>235</integer>
+			<key>ypos</key>
+			<integer>215</integer>
+		</dict>
 		<key>CD8B0843-794E-46D1-8D03-A8012CC67657</key>
 		<dict>
 			<key>xpos</key>
 			<integer>60</integer>
 			<key>ypos</key>
-			<integer>60</integer>
+			<integer>130</integer>
 		</dict>
 	</dict>
+	<key>variables</key>
+	<dict>
+		<key>API_KEY</key>
+		<string></string>
+		<key>DEFAULT_CURRENCY</key>
+		<string>gbp</string>
+	</dict>
+	<key>variablesdontexport</key>
+	<array>
+		<string>API_KEY</string>
+		<string>DEFAULT_CURRENCY</string>
+	</array>
+	<key>version</key>
+	<string>1.0.0</string>
 	<key>webaddress</key>
 	<string>https://pawelgrzybek.com/</string>
 </dict>
