@@ -174,7 +174,7 @@ fi</string>
 	<key>variables</key>
 	<dict>
 		<key>API_KEY</key>
-		<string></string>
+		<string>d95bbadf-1e32-4df6-8078-1b42d1d0fc68</string>
 		<key>DEFAULT_CURRENCY</key>
 		<string>gbp</string>
 	</dict>
