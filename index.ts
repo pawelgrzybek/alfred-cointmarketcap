@@ -1,4 +1,33 @@
-const fetch = require("node-fetch");
+interface Response {
+  data: {
+    id: number;
+    symbol: string;
+    name: string;
+    amount: number;
+    quote: {
+      GBP: {
+        price: number;
+        last_updated: Date;
+      };
+    };
+  };
+}
+
+interface Result {
+  title: string;
+  subtitle: string;
+  arg?: string;
+  text?: {
+    copy: string;
+    largetype: string;
+  };
+  mods?: {
+    cmd: {
+      arg: string;
+      subtitle: string;
+    };
+  };
+}
 
 const MISSING_ARGUMENT_MESSAGE = Object.freeze({
   title: `Incorrect argument`,
@@ -10,26 +39,25 @@ const ERROR_MESSAGE = Object.freeze({
   subtitle: `Are you sure thi coin exists? How about your API key?`,
 });
 
-async function main() {
-  const results = {
-    items: [],
-  };
+const printResult = (result: Result) =>
+  console.log(
+    JSON.stringify({
+      items: [result],
+    })
+  );
 
-  const [apiKey, coinOutputDefault, value, coinSource = "", coinOutput] =
-    process.argv[2].trim().split(" ");
+const [apiKey, coinOutputDefault, value, coinSource = "", coinOutput] =
+  Deno.args[0].split(" ");
 
-  const coinSourceUpperCase = coinSource.toUpperCase();
-  const coinTargetUpperCase = (
-    coinOutput ? coinOutput : coinOutputDefault
-  ).toUpperCase();
+const coinSourceUpperCase = coinSource.toUpperCase();
+const coinTargetUpperCase = (
+  coinOutput ? coinOutput : coinOutputDefault
+).toUpperCase();
 
+try {
   if (!Number(value) || coinSourceUpperCase === "") {
-    results.items.push(MISSING_ARGUMENT_MESSAGE);
-    console.log(JSON.stringify(results));
-    return;
-  }
-
-  try {
+    printResult(MISSING_ARGUMENT_MESSAGE);
+  } else {
     const response = await fetch(
       `https://pro-api.coinmarketcap.com/v1/tools/price-conversion?amount=${value}&symbol=${coinSourceUpperCase}&convert=${coinTargetUpperCase}`,
       {
@@ -45,7 +73,7 @@ async function main() {
     const coinSourceName = name;
     const coinSourceNameUrl = coinSourceName.toLowerCase().replace(/ /g, "-");
 
-    results.items.push({
+    printResult({
       title: result,
       subtitle: `${value} ${coinSourceUpperCase} = ${result} ${coinTargetUpperCase}`,
       arg: result,
@@ -60,11 +88,7 @@ async function main() {
         },
       },
     });
-  } catch (error) {
-    results.items.push(ERROR_MESSAGE);
-  } finally {
-    console.log(JSON.stringify(results));
   }
+} catch {
+  printResult(ERROR_MESSAGE);
 }
-
-main();

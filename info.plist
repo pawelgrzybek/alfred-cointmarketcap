@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>com.pawelgrzybek.alfred-coinmarketcap</string>
+	<string>com.pawelgrzybek.coinmarketcap</string>
 	<key>category</key>
 	<string>Productivity</string>
 	<key>connections</key>
@@ -39,7 +39,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>cmc</string>
+	<string>CoinMarketCap</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -93,13 +93,13 @@
 eval "$($SHELL -i -l -c 'echo -e "\n"PATH=\"$PATH:\$PATH\""\n"' 2&gt;/dev/null | grep "^PATH=")"
 export PATH
 
-if command -v node &gt;/dev/null 2&gt;&amp;1; then
-	node index.js "$API_KEY $DEFAULT_CURRENCY $1"
+if command -v deno &gt;/dev/null 2&gt;&amp;1; then
+	deno run --allow-net=pro-api.coinmarketcap.com index.ts "$API_KEY $DEFAULT_CURRENCY $1"
 else
 	echo $'{
     "items":[
       {
-        "title": "Couldn\'t find the `node` binary",
+        "title": "Couldn\'t find the `deno` binary",
         "subtitle": "Symlink it to `/usr/local/bin`"
       }
     ]
@@ -152,23 +152,23 @@ fi</string>
 		<key>0FB46B8A-5A9A-4F3F-B55B-6A3FB64DD35C</key>
 		<dict>
 			<key>xpos</key>
-			<integer>235</integer>
+			<integer>230</integer>
 			<key>ypos</key>
 			<integer>60</integer>
 		</dict>
 		<key>732B04CC-66FF-4299-B255-2284AA549A97</key>
 		<dict>
 			<key>xpos</key>
-			<integer>235</integer>
+			<integer>225</integer>
 			<key>ypos</key>
-			<integer>215</integer>
+			<integer>210</integer>
 		</dict>
 		<key>CD8B0843-794E-46D1-8D03-A8012CC67657</key>
 		<dict>
 			<key>xpos</key>
 			<integer>60</integer>
 			<key>ypos</key>
-			<integer>130</integer>
+			<integer>135</integer>
 		</dict>
 	</dict>
 	<key>variables</key>
