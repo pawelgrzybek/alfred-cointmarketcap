@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>com.pawelgrzybek.coinmarketcap</string>
+	<string>com.alfredapp.alfred-cointmarketcap</string>
 	<key>category</key>
-	<string>Productivity</string>
+	<string>Internet</string>
 	<key>connections</key>
 	<dict>
 		<key>CD8B0843-794E-46D1-8D03-A8012CC67657</key>
